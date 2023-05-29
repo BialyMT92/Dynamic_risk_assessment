@@ -27,7 +27,7 @@ def score_model():
     confusion_matrix = metrics.confusion_matrix(actual, predictions)
     cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels=[False, True])
     cm_display.plot()
-    plt.savefig(dataset_csv_path+'/confusionmatrix.png')
+    plt.savefig(dataset_csv_path+'/confusionmatrix2.png')
 
 
 if __name__ == '__main__':

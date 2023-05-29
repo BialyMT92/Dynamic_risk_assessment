@@ -9,6 +9,6 @@ response4 = requests.get('http://127.0.0.1:8000/diagnostics').content
 
 response = [response1, response2, response3, response4]
 
-with open ('apireturns.txt', 'w') as file:
+with open ('apireturns2.txt', 'w') as file:
     file.write(str(response))
 
