@@ -1,5 +1,4 @@
 import errno
-
 import pandas as pd
 import numpy as np
 import os
@@ -27,13 +26,8 @@ def merge_multiple_dataframe():
         final_dataframe = final_dataframe.append(currentdf).reset_index(drop=True)
     final_dataframe.drop_duplicates(inplace=True)
 
-    if not os.path.exists(output_folder_path):
-        try:
-            os.makedirs(os.path.dirname(output_folder_path))
-        except OSError as exc: #Guard against race condition
-            if exc.errno != errno.EEXIST:
-                raise
-    final_dataframe.to_csv(output_folder_path+'finaldata.csv')
+    os.makedirs(os.path.dirname(output_folder_path), exist_ok=True)
+    final_dataframe.to_csv(output_folder_path+'finaldata.csv', index=False)
 
     with open(output_folder_path+'ingestedfiles.txt', 'w') as file:
         file.write('\n'.join(filenames))
