@@ -1,0 +1,9 @@
+*/10 * * * * python/bialekm/pythonProject/fullprocess.py
+
+"""
+Every 10 minutes
+
+for virtual workspace
+
+*/10 * * * * python/workspace/fullprocess.py
+"""
