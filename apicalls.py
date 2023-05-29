@@ -1,20 +1,14 @@
 import requests
 
-#Specify a URL that resolves to your workspace
-URL = "http://127.0.0.1/"
-
-
 
 #Call each API endpoint and store the responses
-response1 = #put an API call here
-response2 = #put an API call here
-response3 = #put an API call here
-response4 = #put an API call here
+response1 = requests.post("http://127.0.0.1:8000/prediction?data_location=testdata/testdata.csv").content
+response2 = requests.post("http://127.0.0.1:8000/scoring?model_location=production_deployment/trainedmodel.pkl").content
+response3 = requests.get('http://127.0.0.1:8000/summarystats').content
+response4 = requests.get('http://127.0.0.1:8000/diagnostics').content
 
-#combine all API responses
-responses = #combine reponses here
+response = [response1, response2, response3, response4]
 
-#write the responses to your workspace
-
-
+with open ('apireturns.txt', 'w') as file:
+    file.write(str(response))
 

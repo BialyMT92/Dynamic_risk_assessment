@@ -36,7 +36,7 @@ def score_model(dep_model_path):
 
     with open(model_path+'/latestscore.txt', 'w') as file:
         file.write(str(f1score))
-
+    return str(f1score)
 
 if __name__ == '__main__':
     score_model(model_path+'/trainedmodel.pkl')

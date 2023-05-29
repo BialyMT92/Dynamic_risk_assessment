@@ -2,12 +2,10 @@ from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
 import pickle
-import create_prediction_model
-import diagnosis 
-import predict_exited_from_saved_model
+import diagnostics
 import json
 import os
-
+import scoring
 
 
 ######################Set up variables for use in our script
@@ -23,28 +21,37 @@ prediction_model = None
 
 
 #######################Prediction Endpoint
-@app.route("/prediction", methods=['POST','OPTIONS'])
-def predict():        
+@app.route("/prediction", methods=['POST', 'OPTIONS'])
+def predict():
+    data_location = request.args.get('data_location')
+    predition = diagnostics.model_predictions(data_location)
     #call the prediction function you created in Step 3
-    return #add return value for prediction outputs
+    return str(predition)
 
 #######################Scoring Endpoint
-@app.route("/scoring", methods=['GET','OPTIONS'])
-def stats():        
+@app.route("/scoring", methods=['POST','OPTIONS'])
+def score():
+    model_location = request.args.get('model_location')
+    f1score = scoring.score_model(model_location)
     #check the score of the deployed model
-    return #add return value (a single F1 score number)
+    return f1score
 
 #######################Summary Statistics Endpoint
 @app.route("/summarystats", methods=['GET','OPTIONS'])
-def stats():        
+def summary():
+    stats = diagnostics.dataframe_summary()
     #check means, medians, and modes for each column
-    return #return a list of all calculated summary statistics
+    return str(stats)
 
 #######################Diagnostics Endpoint
 @app.route("/diagnostics", methods=['GET','OPTIONS'])
-def stats():        
-    #check timing and percent NA values
-    return #add return value for all diagnostics
+def diag():
+    list = []
+    exe_time = diagnostics.execution_time()
+    depend = diagnostics.outdated_packages_list()
+    list.append(exe_time)
+    list.append(depend)
+    return str(list)
 
 if __name__ == "__main__":    
     app.run(host='0.0.0.0', port=8000, debug=True, threaded=True)
