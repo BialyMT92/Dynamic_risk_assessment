@@ -49,8 +49,10 @@ def diag():
     list = []
     exe_time = diagnostics.execution_time()
     depend = diagnostics.outdated_packages_list()
+    nan = diagnostics.nan_values()
     list.append(exe_time)
     list.append(depend)
+    list.append(nan)
     return str(list)
 
 if __name__ == "__main__":    

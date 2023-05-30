@@ -37,12 +37,15 @@ def dataframe_summary():
     medians = thedata.median(axis=0, numeric_only=True)
     std = thedata.std(numeric_only=True)
 
-    nas = list(thedata.isna().sum())
-    nascompar = [nas[i]/len(thedata.index) for i in range(len(nas))]
-    statistics = [means, medians, std, nascompar]
+    statistics = [means, medians, std]
     return statistics
 
+def nan_values():
+    thedata = pd.read_csv(dataset_csv_path+'/finaldata.csv')
 
+    nas = list(thedata.isna().sum())
+    nascompar = [nas[i]/len(thedata.index) for i in range(len(nas))]
+    return nascompar
 ##################Function to get timings
 def execution_time():
     times = []
@@ -67,6 +70,7 @@ def outdated_packages_list():
 if __name__ == '__main__':
     print(model_predictions(dataset_csv_path + '/finaldata.csv'))
     print(dataframe_summary())
+    print(nan_values())
     print(execution_time())
     print(outdated_packages_list())
 
