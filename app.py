@@ -10,7 +10,7 @@ import scoring
 
 ######################Set up variables for use in our script
 app = Flask(__name__)
-app.secret_key = '1652d576-484a-49fd-913a-6879acfa6ba4'
+app.secret_key = ## your api key
 
 with open('config.json','r') as f:
     config = json.load(f) 
